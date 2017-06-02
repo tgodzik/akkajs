@@ -1,5 +1,15 @@
 # Home page
-GET     /                           controllers.ActorCtrl.socket
+GET     /                           controllers.ScriptController.index
+
+GET     /scripts                    controllers.ScriptController.scripts
+
+GET     /scripts/:id                controllers.ScriptController.script(id)
+
+POST    /scripts                    controllers.ScriptController.saveScript
+
+GET     /actor/:id                  controllers.ActorController.createActor(id)
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.at(path="/public", file)
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file)
+
+

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en" ng-app="akkaJS">
+<head>
+    <meta charset="utf-8">
+    <title>My AngularJS App</title>
+    <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+    <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/main.css")">
+    <script src="@routes.Assets.versioned("lib/angularjs/angular.js")"></script>
+    <script src="@routes.Assets.versioned("javascripts/main.js")"></script>
+</head>
+<body>
+
+<div ng-controller="ScriptListCtrl">
+
+  <ul>
+    <li ng-repeat="script in scripts">
+      <span>{{script.typeName}}</span>
+      <p>{{script.code}}</p>
+    </li>
+  </ul>
+</div>
+
+</body>
+</html>
