@@ -1,11 +1,10 @@
 package utils.actors
 
 import akka.actor._
-import models.{Script, Sender}
+import models.{MessageWithSender, Script, Sender}
 import org.json4s.DefaultFormats
-import utils.actors.ScriptActor.{AddObserver, Message, RemoveObserver}
+import utils.actors.ScriptActor.{AddObserver, RemoveObserver}
 import utils.scripts.ScriptEngine
-import org.json4s.jackson.JsonMethods._
 
 class ScriptActor(out: ActorRef, script: Script) extends Actor {
 
@@ -24,13 +23,11 @@ class ScriptActor(out: ActorRef, script: Script) extends Actor {
     case RemoveObserver(observer : ActorRef) =>
       observers = observers - observer
 
-    case msg: String =>
-      observers.foreach(_ ! msg)
-      println(out)
-      println(sender())
-//      val snd = parse(msg).extract[Message]
+    case MessageWithSender(msg, ActorRef.noSender) =>
       engine.runReceive(script.id, msg, new Sender(out))
 
+    case MessageWithSender(msg, otherSender) =>
+      engine.runReceive(script.id, msg, new Sender(otherSender))
   }
 }
 
@@ -41,8 +38,6 @@ object ScriptActor {
   case class RemoveObserver(sender : ActorRef)
 
   case class SetScript()
-
-  case class Message(targetId : String, message : String)
 
   def props(script: Script)(out: ActorRef) = Props(classOf[ScriptActor], out, script)
 }
