@@ -33,6 +33,6 @@ class ScriptController extends Controller {
   }
 
   def index = Action {
-    Ok(views.html.Index())
+    Ok(views.html.Index("Scripts"))
   }
 }
