@@ -1,17 +1,8 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
-  <div *ngIf="selectedScript">
     <h1>{{title}}</h1>
-    <h2> {{selectedScript.name}} </h2>
-    <div>
-      <label>name: </label>
-      <input [(ngModel)]="selectedScript.name" placeholder="name">
-    </div>
-    <pre>{{selectedScript.code}}</pre>
-  </div>
-  <ul class="scripts">
-    <li *ngFor="let script of allScripts" (click)="onSelect(script)" [class.selected]="script === selectedScript">
-      <span class="badge">{{script.id}}</span> {{script.name}}
-    </li>
-  </ul>
+    <nav>
+        <a routerLink="/scripts" routerLinkActive="active">Scripts</a>
+        <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+    </nav>
+    <router-outlet></router-outlet>
 </div>

@@ -7,6 +7,8 @@ import org.json4s.DefaultFormats
 import org.json4s.jackson.JsonMethods._
 import org.json4s.jackson.Serialization._
 
+import scala.util.Try
+
 object MongoLocalDatabase {
 
   private val client = MongoClient("localhost")

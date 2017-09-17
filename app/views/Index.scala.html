@@ -3,8 +3,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <base href="/">
     <title>@title</title>
     @* Global stylesheet from public directory *@
+    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")"/>
     @* Stylesheet bundle containing component styles for Angular app *@
     <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("ui/styles.bundle.css")"/>

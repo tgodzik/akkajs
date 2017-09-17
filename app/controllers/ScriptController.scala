@@ -32,7 +32,9 @@ class ScriptController extends Controller {
     Ok(write(script))
   }
 
-  def index = Action {
+  def angular(any : String) = Action {
     Ok(views.html.Index("Scripts"))
   }
+
+  def index = angular("")
 }

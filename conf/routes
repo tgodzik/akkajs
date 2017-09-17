@@ -1,15 +1,16 @@
 # Home page
 GET     /                           controllers.ScriptController.index
 
-GET     /scripts                    controllers.ScriptController.scripts
+GET     /api/scripts                    controllers.ScriptController.scripts
 
-GET     /scripts/:id                controllers.ScriptController.script(id)
+GET     /api/scripts/:id                controllers.ScriptController.script(id)
 
-POST    /scripts                    controllers.ScriptController.saveScript
+POST    /api/scripts                    controllers.ScriptController.saveScript
 
-GET     /scripts/:id/actor          controllers.ActorController.createActor(id)
+GET     /api/scripts/:id/actor          controllers.ActorController.createActor(id)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file)
 
-
+# Angular related routes
+GET     /*other                     controllers.ScriptController.angular(other)
