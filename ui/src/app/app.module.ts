@@ -6,6 +6,8 @@ import { ScriptDetailComponent } from './script-detail.component';
 import { AppComponent } from './app.component';
 import { ScriptService } from './script.service';
 import { RouterModule } from '@angular/router';
+
+import { HttpModule }    from '@angular/http';
 import { DashboardComponent } from './dashboard.component'
 import { AppRoutingModule } from './app.routing.module';
 
@@ -13,7 +15,8 @@ import { AppRoutingModule } from './app.routing.module';
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpModule
   ],
   declarations: [
     DashboardComponent,

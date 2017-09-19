@@ -1,6 +1,6 @@
 package controllers
 
-import models.Script
+import models.{Script, ScriptList}
 import org.json4s.DefaultFormats
 import org.json4s.jackson.Serialization._
 import org.json4s.jackson.JsonMethods
@@ -13,26 +13,30 @@ class ScriptController extends Controller {
 
   def scripts = Action { implicit req =>
     val scripts = MongoLocalDatabase.find[Script]()
-    Ok(write(scripts))
+    Ok(write(ScriptList(scripts)))
   }
 
-  def script(scriptId: String) = Action { implicit req =>
+  def script(scriptId: Int) = Action { implicit req =>
     val script = MongoLocalDatabase.findOne[Script](scriptId)
     script.map(scr => Ok(write(scr))).getOrElse(NotFound)
   }
 
-  def saveScript = Action(parse.tolerantText) {implicit request =>
+  def saveScript = Action(parse.tolerantText) { implicit request =>
     val script = JsonMethods.parse(request.body).extract[Script]
-    MongoLocalDatabase.findOne[Script](script.id).map{
-      found =>
-        MongoLocalDatabase.update(script.id, script)
-    }.getOrElse {
-      MongoLocalDatabase.save(script)
-    }
-    Ok(write(script))
+    val updatedScript = MongoLocalDatabase.save(script)
+    Ok(write(updatedScript))
   }
 
-  def angular(any : String) = Action {
+  def update(id: Int) = Action(parse.tolerantText) { implicit request =>
+    val script = JsonMethods.parse(request.body).extract[Script]
+    MongoLocalDatabase.findOne[Script](id).map {
+      found =>
+        MongoLocalDatabase.update(id, script)
+        Ok(write(script))
+    }.getOrElse(NotFound)
+  }
+
+  def angular(any: String) = Action {
     Ok(views.html.Index("Scripts"))
   }
 

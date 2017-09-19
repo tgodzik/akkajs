@@ -12,8 +12,11 @@ trait ScriptEngine {
 
   def compile(script: Script): Boolean
 
-  def runReceive(id: String, message: String, actor: Sender): Unit = {
-    engine.asInstanceOf[Invocable].invokeFunction(s"receive$id", message, actor)
+  // TODO have a separate entity for Scripts not views
+  def runReceive(id: Option[Int], message: String, actor: Sender): Unit = {
+    id.foreach { scriptId =>
+      engine.asInstanceOf[Invocable].invokeFunction(s"receive$scriptId", message, actor)
+    }
   }
 
 }

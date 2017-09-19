@@ -3,11 +3,13 @@ GET     /                           controllers.ScriptController.index
 
 GET     /api/scripts                    controllers.ScriptController.scripts
 
-GET     /api/scripts/:id                controllers.ScriptController.script(id)
+GET     /api/scripts/:id                controllers.ScriptController.script(id : Int)
+
+PUT     /api/scripts/:id                controllers.ScriptController.update(id : Int)
 
 POST    /api/scripts                    controllers.ScriptController.saveScript
 
-GET     /api/scripts/:id/actor          controllers.ActorController.createActor(id)
+GET     /api/scripts/:id/actor          controllers.ActorController.createActor(id : Int)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file)

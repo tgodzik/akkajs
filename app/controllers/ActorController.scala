@@ -18,7 +18,7 @@ class ActorController @Inject()(implicit actorSystem: ActorSystem, materializer:
 
   implicit val formats = DefaultFormats
 
-  def createActor(id: String) = WebSocket.acceptOrResult[MessageWithSender, MessageWithSender] {
+  def createActor(id: Int) = WebSocket.acceptOrResult[MessageWithSender, MessageWithSender] {
     _ =>
       Future.successful {
         MongoLocalDatabase.findOne[Script](id).map { script =>
